@@ -10,36 +10,31 @@
 #'
 #' @example \dontrun{growthRates(read.csv("GrowthRates_forLGR.csv"), read.csv("GrowthRates_forLGR_wells.csv"))}
 #'
-#' @returns A dataframe containing well, lgr, and maxOD information. Additionally, two plots can be created when plot is set to true.
+#' @returns A dataframe containing well, lgr, and maxOD information. Additionally, two plots can be created and anova created when the plot and aov is set to true.
 #' @import graphics
 #' @export
-growthRates <- function(d, wells, plot = TRUE, aov = TRUE){
+growthRates <- function(d, wells, plot = FALSE, aov = FALSE){
 
-names(d) <- c("t", paste("C", seq(length=ncol(d)-1), sep=""))
-d <- d[complete.cases(d$t),]
+  names(d) <- c("t", paste("C", seq(length=ncol(d)-1), sep=""))
+  d <- d[complete.cases(d$t),]
 
-lgr <- spline.slope.dat(d)
-maxOD <- apply(d[,2:length(d)], 2, function(x) max(x))
-data <- data.frame(wells, lgr, maxOD)
-ddn <- split(data, data$Environment)
-if (aov){
-par(mfrow=c(3, 2))
-for(i in c(6, 5, 4, 2, 3, 1)){
-  print(names(ddn)[i])
-  plot(as.numeric(as.factor(ddn[[i]]$Strain)), ddn[[i]]$lgr, main= names(ddn)[i], ylim=c(0,0.3))
-  test <- aov(ddn[[i]]$lgr~ddn[[i]]$Strain)
-  print(summary(aov(ddn[[i]]$lgr~ddn[[i]]$Strain)))
-  print(TukeyHSD(test))
-}
-if (plot){
+  lgr <- spline.slope.dat(d)
+  maxOD <- apply(d[,2:length(d)], 2, function(x) max(x))
+  data <- data.frame(wells, lgr, maxOD)
+  ddn <- split(data, data$Environment)
+
+  if (aov){
     par(mfrow=c(3, 2))
     for(i in c(6, 5, 4, 2, 3, 1)){
       print(names(ddn)[i])
       plot(as.numeric(as.factor(ddn[[i]]$Strain)), ddn[[i]]$lgr, main= names(ddn)[i], ylim=c(0,0.3))
       test <- aov(ddn[[i]]$lgr~ddn[[i]]$Strain)
-      print(summary(aov(ddn[[i]]$lgr~ddn[[i]]$Strain)))
+      print(summary(aov(test)))
       print(TukeyHSD(test))
+    }
+  }
 
+  if (plot){
       data.ag <- aggregate(data[c("lgr","maxOD")], data[c("Strain", "Environment")], mean)
       data.se <- aggregate(data[c("lgr","maxOD")], data[c("Strain", "Environment")], se)
 
@@ -49,6 +44,7 @@ if (plot){
       data_ag$col <- rep(c("black", "goldenrod", "purple"))
 
       ddn_ag <- split(data_ag, data_ag$Environment)
+
       par(oma=c(3, 1, 1, 1))
       plot(data_ag$numEnviro, data_ag$lgr, col=data_ag$col, pch=19, yaxt="n", xaxt="n", ylab="Growth rate", xlab="", xlim=c(0.7, 6.3), cex=1.3, ylim=c(0, 0.3))
       axis(2, las=2, at=c(0, 0.1, 0.2, 0.3))
@@ -59,12 +55,11 @@ if (plot){
       mtext("Environment", line=4, side=1)
       text(data_ag$numEnviro+0.2, data_ag$lgr, c("B", "B", "A", "B", "B", "A", "C", "B", "A", "B", "B", "A", "B", "B", "A", "B", "A", "B"), cex=0.5)
       dev.off()
-    }
   }
-}
 
   return(data)
 }
+
 nderiv <- function(fit, x, eps=1e-5)
   (predict(fit, x + eps) - predict(fit, x - eps))/(2 * eps)
 
