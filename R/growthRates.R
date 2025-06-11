@@ -54,7 +54,6 @@ growthRates <- function(d, wells, plot = FALSE, aov = FALSE){
       legend("topright", col=c("black", "goldenrod", "purple"), pch=19, legend=c("TUB0", "TUB85", "TUB170"))
       mtext("Environment", line=4, side=1)
       text(data_ag$numEnviro+0.2, data_ag$lgr, c("B", "B", "A", "B", "B", "A", "C", "B", "A", "B", "B", "A", "B", "B", "A", "B", "A", "B"), cex=0.5)
-      dev.off()
   }
 
   return(data)
