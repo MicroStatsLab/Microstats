@@ -6,7 +6,7 @@
 #' @param d A dataframe of the OD values including a column t for time as the first column.
 #' @param wells A dataframe of the well information including strain type and optionally environment.
 #' @param plotRaw A logical value indicating whether you would like to plot your raw data.
-#' @param strainName A
+#' @param strainName A something
 #'
 #' @example \dontrun{growthRates(read.csv("GrowthRates_forLGR.csv"), read.csv("GrowthRates_forLGR_wells.csv"))}
 #'
