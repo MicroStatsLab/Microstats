@@ -14,7 +14,7 @@
 #' @import graphics
 #' @export
 growthRates <- function(d, wells, replicate = c("Strain", "Environment")){
-#test
+
 names(d) <- c("t", paste("C", seq(length=ncol(d)-1), sep=""))
 d <- d[complete.cases(d$t),]
 
