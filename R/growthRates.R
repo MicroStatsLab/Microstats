@@ -13,47 +13,59 @@
 #' @returns A dataframe containing well, lgr, and maxOD information. Additionally, plots can be created.
 #' @import graphics
 #' @export
-growthRates <- function(d, wells, replicate = c("Strain", "Environment")){
+growthRates <- function(d, wells, plotRaw = TRUE, strainName = "Name", replicate = c("Strain", "Environment")){
 
 names(d) <- c("t", paste("C", seq(length=ncol(d)-1), sep=""))
 d <- d[complete.cases(d$t),]
 
 lgr <- spline.slope.dat(d)
 maxOD <- apply(d[,2:length(d)], 2, function(x) max(x))
-data <- data.frame(wells, lgr, maxOD)
-ddn <- split(data, data$Environment)
+data <- data.frame(wells, lgr = round(lgr, 3), maxOD = round(maxOD, 3))
 
-par(mfrow=c(3, 2))
-for(i in c(6, 5, 4, 2, 3, 1)){
-  print(names(ddn)[i])
-  plot(as.numeric(as.factor(ddn[[i]]$Strain)), ddn[[i]]$lgr, main= names(ddn)[i], ylim=c(0,0.3))
-  test <- aov(ddn[[i]]$lgr~ddn[[i]]$Strain)
-  print(summary(aov(test)))
-  print(TukeyHSD(test))
+if(plotRaw == TRUE){
+  par(mfrow = c(12, round(nrow(wells)/12, 0)), mar=c(1, 1, 1, 1))
+  for(i in 1:nrow(wells)) {
+    plot(d[,1], d[,i+1], ylim= c(0, max(d[,2:ncol(d)])*1.1), xlab="", ylab="", yaxt="n", xaxt="n")
+    mtext(wells[i, strainName], side=3, adj=0.01)
   }
-
-data.ag <- aggregate(data[c("lgr","maxOD")], data[c("Strain", "Environment")], mean)
-data.se <- aggregate(data[c("lgr","maxOD")], data[c("Strain", "Environment")], se)
-
-data_ag <- cbind(data.ag, data.se[,3:4 ])
-names(data_ag)[5:6] <- c("lgr.se", "maxOD.se")
-data_ag$numEnviro <- rep(c(6, 5, 4, 2, 3, 1), each=3)
-data_ag$col <- rep(c("black", "goldenrod", "purple"))
-
-ddn_ag <- split(data_ag, data_ag$Environment)
-
-par(oma=c(3, 1, 1, 1))
-plot(data_ag$numEnviro, data_ag$lgr, col=data_ag$col, pch=19, yaxt="n", xaxt="n", ylab="Growth rate", xlab="", xlim=c(0.7, 6.3), cex=1.3, ylim=c(0, 0.3))
-axis(2, las=2, at=c(0, 0.1, 0.2, 0.3))
-axis(1, at=1:6, labels=FALSE)
-text(1:6,  -0.03, c("LB", "NMM(19/0/30)", "NMM(19/30/1)", "NMM(13/30/0)", "NMM(0/30/0)", "NMM(0/100/0)"), srt = -45, xpd=NA, adj=0, cex=0.8)
-arrows(data_ag$numEnviro, data_ag$lgr - data_ag$lgr.se, data_ag$numEnviro, data_ag$lgr + data_ag$lgr.se, length=0)
-legend("topright", col=c("black", "goldenrod", "purple"), pch=19, legend=c("TUB0", "TUB85", "TUB170"))
-mtext("Environment", line=4, side=1)
-text(data_ag$numEnviro+0.2, data_ag$lgr, c("B", "B", "A", "B", "B", "A", "C", "B", "A", "B", "B", "A", "B", "B", "A", "B", "A", "B"), cex=0.5)
+}
 
 return(data)
 }
+
+# ddn <- split(data, data$Environment)
+#
+# par(mfrow=c(3, 2))
+# for(i in c(6, 5, 4, 2, 3, 1)){
+#   print(names(ddn)[i])
+#   plot(as.numeric(as.factor(ddn[[i]]$Strain)), ddn[[i]]$lgr, main= names(ddn)[i], ylim=c(0,0.3))
+#   test <- aov(ddn[[i]]$lgr~ddn[[i]]$Strain)
+#   print(summary(aov(test)))
+#   print(TukeyHSD(test))
+#   }
+#
+# data.ag <- aggregate(data[c("lgr","maxOD")], data[c("Strain", "Environment")], mean)
+# data.se <- aggregate(data[c("lgr","maxOD")], data[c("Strain", "Environment")], se)
+#
+# data_ag <- cbind(data.ag, data.se[,3:4 ])
+# names(data_ag)[5:6] <- c("lgr.se", "maxOD.se")
+# data_ag$numEnviro <- rep(c(6, 5, 4, 2, 3, 1), each=3)
+# data_ag$col <- rep(c("black", "goldenrod", "purple"))
+#
+# ddn_ag <- split(data_ag, data_ag$Environment)
+#
+# par(oma=c(3, 1, 1, 1))
+# plot(data_ag$numEnviro, data_ag$lgr, col=data_ag$col, pch=19, yaxt="n", xaxt="n", ylab="Growth rate", xlab="", xlim=c(0.7, 6.3), cex=1.3, ylim=c(0, 0.3))
+# axis(2, las=2, at=c(0, 0.1, 0.2, 0.3))
+# axis(1, at=1:6, labels=FALSE)
+# text(1:6,  -0.03, c("LB", "NMM(19/0/30)", "NMM(19/30/1)", "NMM(13/30/0)", "NMM(0/30/0)", "NMM(0/100/0)"), srt = -45, xpd=NA, adj=0, cex=0.8)
+# arrows(data_ag$numEnviro, data_ag$lgr - data_ag$lgr.se, data_ag$numEnviro, data_ag$lgr + data_ag$lgr.se, length=0)
+# legend("topright", col=c("black", "goldenrod", "purple"), pch=19, legend=c("TUB0", "TUB85", "TUB170"))
+# mtext("Environment", line=4, side=1)
+# text(data_ag$numEnviro+0.2, data_ag$lgr, c("B", "B", "A", "B", "B", "A", "C", "B", "A", "B", "B", "A", "B", "B", "A", "B", "A", "B"), cex=0.5)
+#
+# return(data)
+# }
 
 nderiv <- function(fit, x, eps=1e-5)
   (predict(fit, x + eps) - predict(fit, x - eps))/(2 * eps)
