@@ -48,7 +48,7 @@ The growthRates function is used to analyze two sets of information (OD values/t
 
 This function can be used either in a file (.R, .Rmd, etc.) or in the console. If the function is being used in the console or an R file, any plots will appear in the `plots` pane if you are using RStudio, and all output will be printed to the console. Once you run the function, it will save a dataframe called `data` to R. This dataframe will consist of the original well information, the maximum slope of LOESS-smoothed log growth curve (lgr), and the maximum optical density (maxOD) for the well.
 
-growthRates takes in two dataframes (`d` and `wells`) as well as logical and string values indicating which output you are looking for and any additional information. The first of which, `plotRaw` indicates whether you would like to have your raw data plotted.By default, plotRaw is set to true, but can be changed to false by indicating `plotRaw = FALSE`. If you would like it to remain true, you can ommit setting this parameter when calling the function. The second parameter is `strainName` which takes in a string value of the strain's name.
+growthRates takes in two dataframes (`d` and `wells`) as well as logical and string values indicating which output you are looking for and any additional information. The first of which, `plotRaw` indicates whether you would like to have your raw data plotted.By default, plotRaw is set to true, but can be changed to false by indicating `plotRaw = FALSE`. If you would like it to remain true, you can omit setting this parameter when calling the function. The second parameter is `strainName` which takes in a string value of the strain's name.
 
 To run the function, type in the function name and the specified arguments like so:
 ```r
