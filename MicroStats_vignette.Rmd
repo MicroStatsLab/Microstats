@@ -26,7 +26,6 @@ The <i>Microstats</i> package allows users to analyze microbial growth data into
 
 ### <i>Microstats</i> Function Overview
 *`growthRates`: used to calculate, plot, and test microbial data.
-*`aggregateData`:
 
 
 ### Required Software
@@ -34,9 +33,9 @@ This program requires installation R (and recommends RStudio) but prior R knowle
 
 
 ### Preparing Data
-Some functions, such as `growthRates` require two dataframes. One containing the optical density (OD) values with the first column as time (in hours), this dataframe may be referred to as `d` throughout the package. The second dataframe should contain metadata about the wells, such as strain type and environment. This dataframe may be referred to as `wells`. Of course, the analysis is only as accurate as the data collected. 
+`growthRates` requires two dataframes. One containing the optical density (OD) values or raw with the first column as time, this dataframe may be referred to as `d` throughout the package. The second dataframe should contain metadata about the wells or map data, such as strain type and environment. This dataframe may be referred to as `wells`. Of course, the analysis is only as accurate as the data collected. 
 
-<b>Important</b> The `d` dataframe's first column must be time, and the `wells` dataframe must have the header "Strain" and optionally "Environment".
+<b>Important</b> The `d` dataframe's first column must be time!
 
 Additionally, the columns of `d` should match with the rows of `wells` such that the first row in wells and the first column of data (column 2) of d should match. Within the functions, data will be cleaned and columns renamed, so manual cleaning is not required. In function cleaning consists of considering only the complete cases with respect to the time variable.
 
@@ -45,23 +44,18 @@ Additionally, the columns of `d` should match with the rows of `wells` such that
 
 
 ### Running growthRates
-The growthRates function is used to analyze two sets of information (OD values/time and well information) and calculate the 
+The growthRates function is used to analyze two sets of information (OD values/time and well information) and calculate the growth information of the given data (log growth curve, maximum optical density). 
 
 This function can be used either in a file (.R, .Rmd, etc.) or in the console. If the function is being used in the console or an R file, any plots will appear in the `plots` pane if you are using RStudio, and all output will be printed to the console. Once you run the function, it will save a dataframe called `data` to R. This dataframe will consist of the original well information, the maximum slope of LOESS-smoothed log growth curve (lgr), and the maximum optical density (maxOD) for the well.
 
-growthRates takes in two dataframes (`d` and `wells`) as well as various logical values indicating which outputs you are looking for. The first of which, `plot` indicates whether you would like to have your results plotted, and second of which is `aov` which indicates whether you would like to run ANOVA tests for significance in lgr values by strain type. It will then print Tukey's Honest Significant Difference (HSD) to perform pairwise comparisons and find which strains differ significantly. By default, these optional values will print automatically, but can be changed to false, and therefore not printed.
+growthRates takes in two dataframes (`d` and `wells`) as well as logical and string values indicating which output you are looking for and any additional information. The first of which, `plotRaw` indicates whether you would like to have your raw data plotted.By default, plotRaw is set to true, but can be changed to false by indicating `plotRaw = FALSE`. If you would like it to remain true, you can ommit setting this parameter when calling the function. The second parameter is `strainName` which takes in a string value of the strain's name.
 
 To run the function, type in the function name and the specified arguments like so:
 ```r
-growthRates(myODData, myWellData, plot = true, aov = true)
-```
-Setting the plot and aov logicals how you desire. For example, to plot the data but not run the ANOVA tests, you would keep plot as true, but change aov to false. Since by default plot is true and you would like to plot, you can choose to not specify the plot parameter in the command line.
-
-```r
-growthRates(myODData, myWellData, aov = false)
+growthRates(myODData, myWellData, plotRaw = FALSE, strainName = "Strain's name")
 ```
 Once you have run the function, you should find the `data` dataframe saved (to your global environment if you are using RStudio).
 
-If you have attempted to plot the outputs, but it results in an error or doesn't plot, enlarge your plots pane as the cause is likely the image is too large for the plots pane.
+If you have attempted to plot the outputs, but it results in an error or doesn't plot, enlarge your plots pane as the cause is likely the image is too large for the plots pane. Adjusting the size of the plots pane should resolve this issue.
 
 
