@@ -1,22 +1,22 @@
-#' combine two ImageJ result csv into one csv file.
+#' combine two ImageJ results files into one .csv file.
 #'
 #' @description
-#' Uses two supplied dataframes (total area, and R/G/B measurements) of the thickness assay images and combines into one file.
+#' Uses two supplied dataframes (total area, and R/G/B measurements) of the thickness assay images and combines them into one file.
 #'
-#' @param area_total A dataframe of the total area.
-#' @param area_RGB A dataframe the red, green, blue area.
+#' @param area_total A dataframe of the total area measurements.
+#' @param area_RGB A dataframe of the individual red, green, blue total area and % area.
 #'
 #' @example \dontrun{growthRates(read.csv("totalArea.csv"), read.csv("separateArea.csv"))}
 #'
-#' @returns A dataframe containing the file name broken down into strain, replicate and images, as well as the measurements
+#' @returns A dataframe containing the file name broken down into strain, replicate and images, as well as the measurements.
 #' @export
 
 combineImageJ <- function(area_total, area_RGB){
 
-  # first we split "label" into different columns for strain, replicate, image
-  # split replicate and image to just keep the numbers
-  # removes jpg and other columns we dont need
-  namesdf_total <- data.frame(Label = area_total$Label)
+  # First we split "Slice" into different columns for Strain, Replicate, Image
+  # Split Replicate and Image to just keep the numbers
+  # Remove jpg and other columns we don't need
+  namesdf_total <- data.frame(Label = area_total$Slice)
   namesdf_total <- namesdf_total %>%
     separate(Label, into = c("Strain", "Replicate", "Image"), sep = "_") %>%
     separate(Image, into = c("Image", "JPG")) %>%
@@ -49,7 +49,7 @@ combineImageJ <- function(area_total, area_RGB){
   # create new column for the RGB values, then creates new columns for RGB measurements for total area and % area
   # this also reorganizes the columns for the colour measurements are next to each other
   new_area_RGB = area_RGB %>%
-    separate(Label, into = c("Label", "Colour"), sep = " ") %>%
+    separate(Slice, into = c("Label", "Colour"), sep = " ") %>%
     pivot_wider(names_from = Colour, values_from = c("Total Area", "% Area")) %>%
     select(-Label, `Total Area_(blue)`, `% Area_(blue)`, `Total Area_(green)`,`% Area_(green)`,`Total Area_(red)`,`% Area_(red)`)
 
@@ -57,6 +57,7 @@ combineImageJ <- function(area_total, area_RGB){
   thickness_measurements = area_total %>%
     cbind(new_area_RGB)
 
+  # return as data frame
   returns(thickness_measurements)
 
 }
