@@ -2,9 +2,9 @@ Package: MicroStats
 Title: Analyzing Growth Rate Data
 Version: 0.0.0.9000
 Authors@R: 
-    person("Aleeza", "Gerstein", "aleeza.gerstein@umanitoba.ca", role = c("aut", "cre"))
-    person("April", "Quill", , "quilla@myumanitoba.ca", role = c("aut"))
-    person("Sloane", "Walker", , "walke15@myumantioba.ca", role = c("aut"))
+    person("Aleeza", "Gerstein", email = "aleeza.gerstein@umanitoba.ca", role = c("aut", "cre"))
+    person("April", "Quill", email = "quilla@myumanitoba.ca", role = c("aut"))
+    person("Sloane", "Walker", email = "walke15@myumantioba.ca", role = c("aut"))
 Description: This package is designed to aid the MicroStats Lab at UManitoba in analyzing growth rates.
 License: MIT + file LICENSE
 Encoding: UTF-8
