@@ -1,7 +1,7 @@
 #' Coverage Depth Function for bin
 #'
 #' @description
-#' what it does
+#' Calculates coverage across the genome in bins of specified size (default 5 kb) from the output of the samtools depth function.
 #'
 #' @param ddn a list that contains information about each strain.
 #' @param line the numeric position in the list for the line of interest.
@@ -11,7 +11,7 @@
 #'
 #' @returns what it outputs
 #' @export
-bin <- function(ddn, line, len=5000){
+binDepth <- function(ddn, line, len=5000){
   #divide the large list into a list that contains read #s for only one line (based on column number), chr, locus
   line.ddn <-  lapply(ddn, "[",  c(1, 2, line))
   #set up an empty list
