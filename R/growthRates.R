@@ -1,7 +1,7 @@
 #' Calculated growth rates for given data
 #'
 #' @description
-#' Uses two supplied dataframes (or one dataframe and one vector) to calculate growth rate information.
+#' Uses two supplied dataframes (or one dataframe and one vector) to calculate growth rate information. Originally written by Richard Fitzjohn (https://github.com/richfitz)
 #'
 #' @param d A dataframe of the OD values including a column t for time as the first column.
 #' @param wells A dataframe of the well information including strain type and optionally environment.
