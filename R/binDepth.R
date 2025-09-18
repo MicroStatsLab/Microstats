@@ -8,11 +8,11 @@
 #' @param len the bin size in bp.
 #'
 #' @examples
-#' #ERR1938053 <- bin(cov.ddn, 11)
+#' #ERR1938053 <- binDepth(cov.ddn, 11)
 #'
 #' @returns what it outputs
 #' @export
-bin <- function(ddn, line, len=5000){
+binDepth <- function(ddn, line, len=5000){
   #divide the large list into a list that contains read #s for only one line (based on column number), chr, locus
   line.ddn <-  lapply(ddn, "[",  c(1, 2, line))
   #set up an empty list
