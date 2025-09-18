@@ -6,7 +6,8 @@
 #' @param line the line of interest, output from bin function
 #' @param strain_name used for plotting defaults to the name of the line
 #'
-#' @example {SWline(SRR8068050)}
+#' @examples
+#' #SWline(SRR8068050)
 #'
 #' @returns what it outputs
 #' @export

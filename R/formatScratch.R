@@ -5,7 +5,8 @@
 #'
 #' @param results A dataframe that stem from using the Wound_Healing_Tool in ImageJ for the Scratch Assay analysis.
 #'
-#' @example \dontrun{formatScratch(read.csv("Scratch_Assay_Measurements.csv"))}
+#' @examples
+#' # formatScratch(read.csv("Scratch_Assay_Measurements.csv"))
 #'
 #' @returns A .csv file containing the file name broken down into Strain, Replicate, Day and Image, as well as the multiple measurements from one image summed into one row.
 #' @export

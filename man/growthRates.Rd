@@ -21,3 +21,7 @@ A dataframe containing well, lgr, and maxOD information. Additionally, plots of 
 \description{
 Uses two supplied dataframes (or one dataframe and one vector) to calculate growth rate information.
 }
+\examples{
+# growthRates(read.csv("GrowthRates_forLGR.csv"), read.csv("GrowthRates_forLGR_wells.csv"))
+
+}

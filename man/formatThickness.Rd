@@ -15,3 +15,7 @@ A .csv file containing the file name broken down into Strain, Replicate and Imag
 \description{
 Uses one supplied dataframe (thickness_results) from the Thickness Assay ImageJ analysis, and reorganizes the dataframe to display measurements by the separate colours (Red, Green, Blue) and total area.
 }
+\examples{
+#formatThickness(read.csv("Thickness_Assay_Measurements.csv"))
+
+}
