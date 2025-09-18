@@ -7,7 +7,8 @@
 #' @param line the numeric position in the list for the line of interest.
 #' @param len the bin size in bp.
 #'
-#' @example {ERR1938053 <- bin(cov.ddn, 11)}
+#' @examples
+#' #ERR1938053 <- bin(cov.ddn, 11)
 #'
 #' @returns what it outputs
 #' @export

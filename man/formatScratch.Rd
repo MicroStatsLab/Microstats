@@ -15,3 +15,7 @@ A .csv file containing the file name broken down into Strain, Replicate, Day and
 \description{
 Uses one supplied dataframe (scratch_results) from the Scratch Assay ImageJ analysis, and reorganizes the dataframe to include label breakdown names, and sum the multiple measurements into one row.
 }
+\examples{
+# formatScratch(read.csv("Scratch_Assay_Measurements.csv"))
+
+}

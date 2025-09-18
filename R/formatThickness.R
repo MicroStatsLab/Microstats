@@ -5,7 +5,8 @@
 #'
 #' @param results A dataframe that stems from using the Epithelial_Barrier_Thickness_Tool in ImageJ for the Thickness Assay analysis.
 #'
-#' @example \dontrun{formatThickness(read.csv("Thickness_Assay_Measurements.csv"))}
+#' @examples
+#' #formatThickness(read.csv("Thickness_Assay_Measurements.csv"))
 #'
 #' @returns A .csv file containing the file name broken down into Strain, Replicate and Image, as well as the measurements for the colours and total area.
 #' @export

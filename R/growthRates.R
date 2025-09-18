@@ -8,7 +8,8 @@
 #' @param plotRaw A logical value indicating whether you would like to plot your raw data.
 #' @param strainName A string value indicating the strain name.
 #'
-#' @example \dontrun{growthRates(read.csv("GrowthRates_forLGR.csv"), read.csv("GrowthRates_forLGR_wells.csv"))}
+#' @examples
+#' # growthRates(read.csv("GrowthRates_forLGR.csv"), read.csv("GrowthRates_forLGR_wells.csv"))
 #'
 #' @returns A dataframe containing well, lgr, and maxOD information. Additionally, plots of the raw data curves can be created.
 #' @import graphics

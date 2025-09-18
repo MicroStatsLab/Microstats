@@ -17,3 +17,7 @@ what it outputs
 \description{
 What it does
 }
+\examples{
+#SWline(SRR8068050)
+
+}

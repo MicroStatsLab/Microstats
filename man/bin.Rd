@@ -19,3 +19,7 @@ what it outputs
 \description{
 what it does
 }
+\examples{
+#ERR1938053 <- bin(cov.ddn, 11)
+
+}
