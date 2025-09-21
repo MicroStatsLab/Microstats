@@ -19,7 +19,7 @@ growthRates(d, wells, plotRaw = TRUE, strainName = "Name")
 A dataframe containing well, lgr, and maxOD information. Additionally, plots of the raw data curves can be created.
 }
 \description{
-Uses two supplied dataframes (or one dataframe and one vector) to calculate growth rate information.
+Uses two supplied dataframes (or one dataframe and one vector) to calculate growth rate information. Originally written by Richard Fitzjohn (https://github.com/richfitz)
 }
 \examples{
 # growthRates(read.csv("GrowthRates_forLGR.csv"), read.csv("GrowthRates_forLGR_wells.csv"))

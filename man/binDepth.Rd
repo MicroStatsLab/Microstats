@@ -17,7 +17,7 @@ binDepth(ddn, line, len = 5000)
 what it outputs
 }
 \description{
-what it does
+Calculates coverage across the genome in bins of specified size (default 5 kb) from the output of the samtools depth function.
 }
 \examples{
 #ERR1938053 <- binDepth(cov.ddn, 11)
