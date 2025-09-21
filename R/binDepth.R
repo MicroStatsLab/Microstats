@@ -1,13 +1,14 @@
 #' Coverage Depth Function for bin
 #'
 #' @description
-#' what it does
+#' Calculates coverage across the genome in bins of specified size (default 5 kb) from the output of the samtools depth function.
 #'
 #' @param ddn a list that contains information about each strain.
 #' @param line the numeric position in the list for the line of interest.
 #' @param len the bin size in bp.
 #'
 #' @examples
+
 #' #ERR1938053 <- binDepth(cov.ddn, 11)
 #'
 #' @returns what it outputs
