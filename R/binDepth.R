@@ -8,7 +8,8 @@
 #' @param len the bin size in bp.
 #'
 #' @examples
-#' #ERR1938053 <- bin(cov.ddn, 11)
+
+#' #ERR1938053 <- binDepth(cov.ddn, 11)
 #'
 #' @returns what it outputs
 #' @export
